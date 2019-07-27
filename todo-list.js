@@ -29,7 +29,7 @@ class ToDoList {
 
 
 class Item {
-  constructor(id, body) {
+  constructor(body, id) {
     this.id = id || Date.now();
     this.body = body;
     this.taskComplete = false;

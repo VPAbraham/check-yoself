@@ -2,7 +2,7 @@
 
 * {
   box-sizing: border-box;
-  border: solid 1px red;
+  /* border: solid 1px red; */
 }
 
 html {
@@ -64,9 +64,11 @@ body {
   background-color: #587A8A;
   text-align: center;
   height: 100%;
+  display: flex;
+  justify-content: center;
 }
 .nav__upper {
-
+  width: 95%;
 }
 
 .nav__article--ttitle {
@@ -76,7 +78,8 @@ body {
 .nav__label--ttitle,
 .nav__label--titem {
   font-size: 14px;
-  color: #D0CCD3;
+  color: #C7D3D8;
+  float: left;
 }
 
 .nav__input--ttitle {
@@ -90,15 +93,15 @@ body {
 }
 
 .nav__li--task {
-    font-size: 1em;
-    margin-top: 10px;
-    color: #F3F6F7;
-    display: flex;
-    align-items: center;
+  font-size: 1em;
+  margin-top: 10px;
+  color: #F3F6F7;
+  display: flex;
+  align-items: center;
 }
 
 .nav__img--del--idea {
-  height: 20px;
+  width: 2em;
   padding-right: 10px;
   display: inline-block;
   margin-left: -5px;
@@ -123,13 +126,17 @@ body {
 
 .nav__input--ttitle,
 .nav__input--titem {
-    height: 40px;
-    width: 95%;
-    border: 1.5px solid #1F1F3D;
-    border-radius: 2.5px;
+  height: 40px;
+  width: 100%;
+  border: 1.5px solid #1F1F3D;
+border-radius: 2.5px;
 }
 
 .nav__button--titem {
+  color: white;
+  background-color: #1F1F3D;
+  border-radius: 2.5px;
+  border: none;
   height: 30px;
   width: 30px;
 }
@@ -153,7 +160,8 @@ body {
 
 .nav__button {
   height: 40px;
-  width: 95%;
+  width: 100%;
+  border: none;
   color: white;
   font-size: 20px;
   border-radius: 2.5px;
@@ -170,38 +178,91 @@ body {
 }
 
 .task__card {
-  border: 1px solid black;
-  width: 250px;
+  border: solid 2px #C7D3D8;
+  width: 45%;
   margin: 6vh;
   display: flex;
   flex-direction: column;
-  height: ;
+  height: 48vh;
 }
 
 .task__card--header {
-
-}
-
-.task__card--body {
-
-}
-
-.task__card--list {
-
-}
-
-.task__card--footer {
+  height: 17%;
+  border-bottom: solid 2px #C7D3D8;
+  text-align: left;
   display: flex;
 }
 
-.task__card--urgent {
-
+h3 {
+  margin: 3% 0px 3% 5%;
 }
 
+.task__card--body {
+  min-height: 63%
+  /* height: 100%; */
+}
+
+.task__card--list {
+  list-style: none;
+  font-size: 14px;
+  padding-left: 4%;
+}
+
+.task__card--li{
+  margin: 4% 6% 0 0;
+}
+
+.task__card--checkbox {
+  display: inline;
+  border-radius: 50%;
+  height: 1em;
+  vertical-align: middle;
+}
+
+li p {
+  display: inline;
+  margin: 0;
+  margin-left: 3%;
+  font-size: 1.4em;
+  vertical-align: middle;
+}
+
+.test-checkbox {
+  border-radius: 50%;
+}
+
+.task__card--footer {
+  border-top: solid 2px #C7D3D8;
+}
+
+footer span {
+  color: #3C6577;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: .3em 0.4em;
+}
+
+.task__card--urgent {
+  float: left;
+}
+
+.task__card--delete {
+  float: right;
+}
+
+.span__p--delete {
+  margin-top: .5em;
+}
 .urgent-img {
 
 }
 
-p {
-  font-size: 12px;
+span {
+  text-align: center;
+}
+
+span p {
+  font-size: .5em;
+  margin: .1em 0;
 }
