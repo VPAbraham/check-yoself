@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <title>CHECK YO' SELF</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="normalize.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap" rel="stylesheet">
   </head>
   <body>
     <header class="header">
-      <h1>CHECK YO'SELF</h1>
+      <h1>CHECK <span>YO'</span> SELF</h1>
       <article class="header__search">
         <img class="header__search--icon" src="images/search.svg" alt="magnifying glass search icon">
         <input class="header__search--bar" type="text" name="" value="Search">
@@ -20,41 +20,46 @@
     <nav class="nav">
       <section class="nav__upper">
         <article class="nav__article--ttitle">
-          <label class="nav__label--ttitle" for=""></label>
+          <label class="nav__label--ttitle" for="">Task Title</label>
           <input class="nav__input--ttitle" type="text" name="" value="">
+          <ul class="nav__task--list"></ul>
         </article>
-        <aside class="nav__aside--tasks">
-        </aside>
         <article class="nav__article--titem">
-          <label class="nav__label--titem"for=""></label>
+          <label class="nav__label--titem"for="">Task Item</label>
           <input class="nav__input--titem" type="text" name="" value="">
-          <button type="button" name="button"></button>
+          <button class="nav__button--titem" type="button" name="button">+</button>
         </article>
-        <button class="nav__button--make-tl nav__button" type="button" name="button"></button>
-        <button class="nav__button--clear" type="button" name="button"></button>
+        <button class="nav__button--make-tl nav__button" type="button" name="button">Make Task List</button>
+        <button class="nav__button--clear nav__button" type="button" name="button">Clear All</button>
         <section class="nav__lower">
-          <button class="nav__button--filter" type="button" name="button"></button>
+          <button class="nav__button--filter nav__button" type="button" name="button">Filter By Urgency </button>
         </section>
       </section>
     </nav>
     <main class="main">
       <article class="task__card">
         <header class="task__card--header">
+          <h3>Task Title</h3>
         </header>
         <section class="task__card--body">
           <ul class="task__card--list">
+            <li class="task__card--li"><input class="task__card--checkbox" type="checkbox"><p>Don't ever play yourself</p></li>
+            <li class="task__card--li"><input class="task__card--checkbox" type="checkbox"><p>Don't ever play yourself</p></li>
           </ul>
         </section>
         <footer class="task__card--footer">
-          <div class="task__card--urgent">
+          <span class="task__card--urgent">
             <img class="urgent-img" src="images/urgent.svg" alt="urgent lightning bolt">
             <p>URGENT</p>
-          </div>
-          <div class="task__card--delete">
+          </span>
+          <span class="task__card--delete">
             <img class="delete-img" src="images/delete.svg" alt="delete X button">
-            <p>DELETE</p>
-          </div>
+            <p class="span__p--delete">DELETE</p>
+          </span>
         </footer>
       </article>
     </main>
   </body>
+<script src="todo-list.js" type="text/javascript"></script>
+<script src="main.js" type="text/javascript"></script>
+</html>
