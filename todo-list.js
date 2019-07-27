@@ -2,12 +2,12 @@ class ToDoList {
   constructor(id, title, tasks, urgent) {
     this.id = id || Date.now();
     this.title = title;
-    this.taskList = tasks;
+    this.tasks = tasks;
     this.urgent = urgent || false;
   }
 
   saveToStorage() {
-    var toDosString = JSON.stringify(toDosArray);
+    var toDosString = JSON.stringify(storedToDos);
     localStorage.setItem("storedToDos", toDosString);
   }
 
@@ -28,7 +28,7 @@ class ToDoList {
 }
 
 
-class Items {
+class Item {
   constructor(body, id) {
     this.id = id || Date.now();
     this.body = body;

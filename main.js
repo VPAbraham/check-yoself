@@ -16,8 +16,8 @@ var toDosArray = JSON.parse(localStorage.getItem("storedToDos"));
 
 
 // Event listeners
-nav.addEventListener('keyup', enableItemBtn())
-addItemBtn.addEventListener('click', appendNewTask);
+addItemBtn.addEventListener('click', pushItemToTaskList);
+
 // Event handlers
 function navBtnsHandler(e) {
   console.log(e);
@@ -28,25 +28,17 @@ function navBtnsHandler(e) {
 
 // Functions
 
-function enableItemBtn(e) {
-    if (titleInput.value === '' || taskItemInput.value === ''){
-        addItemBtn.disabled = false;
-        clearAllBtn.disabled = false;
-    // } else {
-    //     addItem.disabled = false;
-    //     clearAllBtn.disabled = false;
-      }
+
+function pushItemToTaskList(e) {
+  if (taskItemInput.value != "") {
+    var newItem = new Item(taskItemInput.value);
+    tasksArray.push(newItem);
+    console.log(newItem);
+    appendNewItem(newItem);
+  }
 }
 
-function enableMakeTaskList(e) {
-    if (itemInput.value === ''){
-        addItemBtn.disabled = true;
-    } else {
-        addItemBtn.disabled = false;
-    }
-};
-
-function appendNewTask(e) {
+function appendNewItem(item) {
   var taskList = document.querySelector('.nav__task--list');
   var newlyEnteredTask = taskItemInput.value;
   taskList.insertAdjacentHTML('beforeend',
@@ -54,3 +46,13 @@ function appendNewTask(e) {
   taskItemInput.value = "";
   makeListBtn.disabled = false;
 }
+
+function removeNewItem(e) {
+  var newlyMadeItem = e.target.closest('li');
+
+}
+// function delCard(e) {
+//   if (e.target.className === "nav__img--del--idea") {
+//
+//   }
+// }
