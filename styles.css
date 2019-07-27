@@ -30,7 +30,9 @@ body {
   height: 100%;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas: "header header header" "nav main main" "nav main main" "nav main main" "nav main main" "nav main main" "nav main main" "nav main main" "nav main main" "nav main main";
+  grid-template-areas: "header header header" "nav main main" "nav main main"
+  "nav main main" "nav main main" "nav main main" "nav main main"
+  "nav main main" "nav main main" "nav main main";
 }
 
 /* HEADER */

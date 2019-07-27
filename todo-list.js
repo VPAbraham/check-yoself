@@ -1,5 +1,5 @@
 class ToDoList {
-  constructor(id, title, tasks, urgent) {
+  constructor(title, tasks, id, urgent) {
     this.id = id || Date.now();
     this.title = title;
     this.tasks = tasks;
@@ -7,8 +7,8 @@ class ToDoList {
   }
 
   saveToStorage() {
-    var toDosString = JSON.stringify(storedToDos);
-    localStorage.setItem("storedToDos", toDosString);
+    var toDosString = JSON.stringify(toDosArray);
+    localStorage.setItem('tasks', toDosString);
   }
 
   deleteFromStorage(i) {
@@ -29,7 +29,7 @@ class ToDoList {
 
 
 class Item {
-  constructor(body, id) {
+  constructor(id, body) {
     this.id = id || Date.now();
     this.body = body;
     this.taskComplete = false;
