@@ -27,7 +27,7 @@ span {
 body {
   margin: 0;
   display: grid;
-  height: 100%;
+  min-height: 100%;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas: "header header header" "nav main main" "nav main main"
@@ -38,10 +38,9 @@ body {
 /* HEADER */
 
 .header {
-  grid-area: header;
-  background-color: #1F1F3D;
-  display: flex;
-  align-items: center;
+    grid-area: header;
+    background-color: #1F1F3D;
+    align-items: center;
 }
 
 .header__search {
@@ -175,6 +174,7 @@ border-radius: 2.5px;
 .main {
   grid-area: main;
   background-color: #F3F6F7;
+  height: 100%;
 }
 
 .task__card {
