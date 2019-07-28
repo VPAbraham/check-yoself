@@ -16,6 +16,7 @@ img {
 
 h1{
   color: #FFFFFF;
+  display: inline;
   font-size: 30px;
   margin: 15px 9px;
 }
@@ -30,7 +31,7 @@ body {
   min-height: 100%;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas: "header header header" "nav main main" "nav main main"
+  grid-template-areas: "header header header" "header header header" "nav main main"
   "nav main main" "nav main main" "nav main main" "nav main main"
   "nav main main" "nav main main" "nav main main";
 }
@@ -45,15 +46,21 @@ body {
 
 .header__search {
   height: 40px;
+  display: inline;
+  float: right;
 }
 
 .header__search--bar {
   height: 100%;
+  display: inline;
+  vertical-align:middle;
 }
 
 .header__search--icon {
   height: 100%;
+  display: inline;
   background-color: #587A8A;
+  vertical-align: middle;
 }
 
 /* NAV */
