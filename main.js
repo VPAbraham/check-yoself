@@ -20,7 +20,8 @@ var toDosArray = JSON.parse(localStorage.getItem('tasks')) || [];
 // Event listeners
 addItemBtn.addEventListener('click', pushItemToTaskList);
 itemList.addEventListener('click', delItem);
-makeListBtn.addEventListener('click', makeCardHandler)
+makeListBtn.addEventListener('click', makeCardHandler);
+clearAllBtn.addEventListener('click', clearAll);
 
 // Event handlers
 function navBtnsHandler(e) {
@@ -37,7 +38,6 @@ function pushItemToTaskList(e) {
   if (taskItemInput.value != '') {
     var newItem = new Item(taskItemInput.value);
     tasksArray.push(newItem);
-    console.log(newItem);
     appendNewItem(newItem);
   }
 }
@@ -45,23 +45,21 @@ function pushItemToTaskList(e) {
 function appendNewItem(item) {
   var taskList = document.querySelector('.nav__task--list');
   var newlyEnteredTask = taskItemInput.value;
-  taskList.insertAdjacentHTML('beforeend',
-  `<li class="nav__li--task" data-id=${item.id}><img class="nav__img--del--idea" alt="delete X button" src="images/delete.svg"><p class="nav__p--task">${newlyEnteredTask}</p></li>`)
-  taskItemInput.value = "";
+  taskList.insertAdjacentHTML('beforeend',`
+  <li class="nav__li--task" data-id=${item.id}>
+    <img class="nav__img--del--idea" alt="delete X button" src="images/delete.svg">
+    <p class="nav__p--task">${newlyEnteredTask}</p>
+  </li>`)
+  taskItemInput.value = '';
   makeListBtn.disabled = false;
 }
 
 function delItem(e) {
   var item = e.target.closest('li');
-  console.log(item.dataset.id)
   var itemId = parseInt(item.dataset.id);
-  console.log(itemId);
   var itemIndex = tasksArray.findIndex(item => item.id === itemId);
-  console.log(tasksArray);
-  console.log(itemIndex);
   tasksArray.splice(itemIndex, 1)
   item.remove();
-  console.log(tasksArray);
 }
 
 function makeCardHandler(e) {
@@ -70,7 +68,9 @@ function makeCardHandler(e) {
     toDosArray.push(toDoList);
     toDoList.saveToStorage();
     makeCard(toDoList);
-    pushTaskListToCard(toDoList)
+    console.log(toDoList);
+    pushTaskListToCard(toDoList);
+    resetfields();
   }
 }
 
@@ -83,12 +83,13 @@ function pushTaskListToCard(toDoList) {
       <p>${toDoList.tasks[i].body}</p>
     </li>`
     console.log(listItems);
-    return listItems;
   }
+  return listItems;
 }
 
 function makeCard(toDoList) {
-  var taskList = `<article class="task__card">
+  var taskList = `
+  <article class="task__card">
     <header class="task__card--header">
       <h3>${toDoList.title}</h3>
     </header>
@@ -110,4 +111,20 @@ function makeCard(toDoList) {
   </article>`;
   main.insertAdjacentHTML('afterbegin', taskList);
   // clearAll();
+}
+
+function resetfields() {
+  titleInput.value = '';
+  taskItemInput.value = '';
+  itemList.innerText = '';
+  tasksArray = [];
+}
+
+function clearAll() {
+  if (titleInput.value === '' && itemList.innerText === '') {
+    clearAllBtn.disabled = true;
+    // clearAllBtn.style.["background-color"] = "grey";
+  } else {
+    resetfields();
+  }
 }

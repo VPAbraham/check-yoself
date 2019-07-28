@@ -38,10 +38,9 @@ body {
 /* HEADER */
 
 .header {
-  grid-area: header;
-  background-color: #1F1F3D;
-  display: flex;
-  align-items: center;
+    grid-area: header;
+    background-color: #1F1F3D;
+    align-items: center;
 }
 
 .header__search {
