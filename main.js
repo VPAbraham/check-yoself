@@ -46,6 +46,9 @@ function loadFunctionsHandler() {
 
 // Functions
 
+function getId(obj) {
+  objId = parseInt(obj.dataset.id);
+}
 
 function pushItemToTaskList(e) {
   if (taskItemInput.value != '') {
@@ -70,17 +73,18 @@ function appendNewItem(item) {
 function delItem(e) {
   var item = e.target.closest('li');
   var itemId = parseInt(item.dataset.id);
-  var itemIndex = tasksArray.findIndex(item => item.id === itemId);
-  tasksArray.splice(itemIndex, 1)
+  var index = tasksArray.findIndex(item => item.id === itemId);
+  tasksArray.splice(index, 1)
   item.remove();
 }
+
 
 function pushTaskListToCard(toDoList) {
   var listItems = '';
   for (var i = 0; i < toDoList.tasks.length; i++) {
     listItems += `
     <li class="task__card--li">
-      <input class="task__card--checkbox" type="checkbox">
+      <input class="task__card--checkbox" type="checkbox" data-id=${toDoList.tasks[i].id}>
       <p>${toDoList.tasks[i].body}</p>
     </li>`
   }
@@ -89,7 +93,7 @@ function pushTaskListToCard(toDoList) {
 
 function makeCard(toDoList) {
   var taskList = `
-  <article class="task__card">
+  <article class="task__card" data-id=${toDoList.id}
     <header class="task__card--header">
       <h3>${toDoList.title}</h3>
     </header>
@@ -137,4 +141,10 @@ function persistToDoLists() {
   toDosArray.forEach(function(toDoList) {
     makeCard(toDoList);
   });
+}
+
+function taskItemCheck(e) {
+  if (e.target.className.contains('task__card--checkbox')) {
+
+  }
 }
