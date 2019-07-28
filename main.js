@@ -70,49 +70,44 @@ function makeCardHandler(e) {
     toDosArray.push(toDoList);
     toDoList.saveToStorage();
     makeCard(toDoList);
+    pushTaskListToCard(toDoList)
   }
 }
 
-function createCard(toDoList) {
-  var listCard = `<article class="task__card" data-id=${toDoList.id}>
+function pushTaskListToCard(toDoList) {
+  var listItems = '';
+  for (var i = 0; i < toDoList.tasks.length; i++) {
+    listItems += `
+    <li class="task__card--li">
+      <input class="task__card--checkbox" type="checkbox">
+      <p>${toDoList.tasks[i].body}</p>
+    </li>`
+    console.log(listItems);
+    return listItems;
+  }
+}
+
+function makeCard(toDoList) {
+  var taskList = `<article class="task__card">
     <header class="task__card--header">
+      <h3>${toDoList.title}</h3>
     </header>
     <section class="task__card--body">
       <ul class="task__card--list">
-      $
+      ${pushTaskListToCard(toDoList)}
       </ul>
     </section>
     <footer class="task__card--footer">
-      <div class="task__card--urgent">
+      <span class="task__card--urgent">
         <img class="urgent-img" src="images/urgent.svg" alt="urgent lightning bolt">
         <p>URGENT</p>
-      </div>
-      <div class="task__card--delete">
+      </span>
+      <span class="task__card--delete">
         <img class="delete-img" src="images/delete.svg" alt="delete X button">
-        <p>DELETE</p>
-      </div>
+        <p class="span__p--delete">DELETE</p>
+      </span>
     </footer>
-  </article>`
-  `
-  <div class="todo__card--container" data-id=${newTaskList.id}>
-    <article class="todo__card--header">
-      <h3 class="todo__card--title">${newTaskList.title}</h3>
-    </article>
-    <ul class="todo__card--middle">
-    ${appendTaskList(newTaskList)}
-    </ul>
-    <article class="todo__card--footer">
-      <div class="todo__card--buttons--container1">
-        <img class="todo__card--button--urgent" src="check-yo-self-icons/urgent.svg"/>
-        <p class="todo__card--text--urgent">URGENT</p>
-      </div>
-      <div class="todo__card--buttons--container2">
-        <img class="todo__card--button--delete" src="check-yo-self-icons/delete.svg"/>
-        <p class="todo__card--text--delete">DELETE</p>
-      </div>
-    </article>
-  </div>
-  `;
-  cardContainer.insertAdjacentHTML('afterbegin', listCard);
-  clearAll();
+  </article>`;
+  main.insertAdjacentHTML('afterbegin', taskList);
+  // clearAll();
 }
