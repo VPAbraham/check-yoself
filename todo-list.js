@@ -11,8 +11,12 @@ class ToDoList {
     localStorage.setItem('tasks', toDosString);
   }
 
+  deletefromGlobalArray(i) {
+
+  }
+
   deleteFromStorage(i) {
-    todosArray.splice(i, 1);
+    toDosArray.splice(i, 1);
 		this.saveToStorage();
   }
 
