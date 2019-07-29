@@ -46,12 +46,16 @@ function makeCardHandler(e) {
 }
 
 function cardButtonsHandler(e) {
-  if (e.target.className === 'task__card--checkbox'){
+  if (e.target.className === 'task__card--checkbox') {
     taskItemCheck(e);
     toggleTaskCheck(e);
   }
-  if (e.target.className === 'task__card--delete'){
-    
+  if (e.target.className === 'delete-img') {
+    delTaskList(e);
+  }
+  if (e.target.className === 'urgent-img') {
+    markUrgent(e);
+    toggleUrgent(e);
   }
 }
 
@@ -97,11 +101,11 @@ function delItem(e) {
 function pushTaskListToCard(toDoList) {
   var listItems = '';
   for (var i = 0; i < toDoList.tasks.length; i++) {
-    checkStatus = toDoList.tasks[i].taskComplete ? 'images/checkbox-active.svg'
+    var checkStatus = toDoList.tasks[i].taskComplete ? 'images/checkbox-active.svg'
     : 'images/checkbox.svg';
     listItems += `
-    <li class="task__card--li" data-id=${toDoList.tasks[i].id}>
-      <img class="task__card--checkbox" src="${checkStatus}">
+    <li class="task__card--li">
+      <img class="task__card--checkbox" src="${checkStatus}" data-id=${toDoList.tasks[i].id}>
       <p>${toDoList.tasks[i].body}</p>
     </li>`
   }
@@ -109,6 +113,7 @@ function pushTaskListToCard(toDoList) {
 }
 
 function makeCard(toDoList) {
+  var urgentStatus = toDoList.urgent ? 'images/urgent-active.svg' : 'images/urgent.svg';
   var taskList = `
   <article class="task__card" data-id=${toDoList.id}
     <header class="task__card--header">
@@ -121,7 +126,7 @@ function makeCard(toDoList) {
     </section>
     <footer class="task__card--footer">
       <span class="task__card--urgent">
-        <img class="urgent-img" src="images/urgent.svg" alt="urgent lightning bolt">
+        <img class="urgent-img" src="${urgentStatus}" alt="urgency lightning bolt">
         <p>URGENT</p>
       </span>
       <span class="task__card--delete">
@@ -161,15 +166,38 @@ function persistToDoLists() {
 }
 
 function taskItemCheck(e) {
-    var toDoListId = getId(e.target.closest('.task__card'));
-    var toDoListIndex = getToDoListIndex(toDoListId);
-    var toDoListObj = toDosArray[getToDoListIndex(toDoListId)];
-    var taskItemId = getId(e.target.closest('.task__card--li'));
-    var taskItemIndex = toDoListObj.tasks.findIndex(obj => obj.id === taskItemId);
-    toDosArray[toDoListIndex].updateTask(toDoListIndex, taskItemIndex);
+  var toDoListId = getId(e.target.closest('.task__card'));
+  var toDoListIndex = getToDoListIndex(toDoListId);
+  var toDoListObj = toDosArray[getToDoListIndex(toDoListId)];
+  var taskItemId = getId(e.target.closest('.task__card--li'));
+  var taskItemIndex = toDoListObj.tasks.findIndex(obj => obj.id === taskItemId);
+  toDosArray[toDoListIndex].updateTask(toDoListIndex, taskItemIndex);
 }
 
 function toggleTaskCheck(e) {
   var checkbox = e.target.closest('.task__card--checkbox');
     checkbox.src = 'images/checkbox.svg' ? checkbox.src='images/checkbox-active.svg' : checkbox.src='images/checkbox.svg';
+}
+
+// function delCardDom(e) {
+//   e.target.closest('article').remove();
+// }
+
+function delTaskList(e) {
+  var toDoListId = getId(e.target.closest('.task__card'));
+  var toDoListIndex = getToDoListIndex(toDoListId);
+  toDosArray[toDoListIndex].deleteFromStorage(toDoListIndex);
+  toDosArray.splice(toDoListIndex, 1);
+  e.target.closest('article').remove();
+}
+
+function markUrgent(e) {
+  var toDoListId = getId(e.target.closest('.task__card'));
+  var toDoListIndex = getToDoListIndex(toDoListId);
+  toDosArray[toDoListIndex].updateToDo();
+}
+
+function toggleUrgent(e) {
+  var urgentButton = e.target.closest('.urgent-img');
+  urgentButton.src = 'images/urgent.svg' ? urgentButton.src='images/urgent-active.svg' : urgentButton.src='images/checkbox.svg';
 }
