@@ -9,6 +9,7 @@ var itemList = document.querySelector('.nav__task--list')
 var makeListBtn = document.querySelector('.nav__button--make-tl');
 var clearAllBtn = document.querySelector('.nav__button--clear');
 var filterUrgencyBtn = document.querySelector('.nav__button--filter');
+var toDoListCard = document.querySelector('.task__card');
 var tasksArray = [];
 var toDosArray = JSON.parse(localStorage.getItem('tasks')) || [];
 
@@ -18,14 +19,20 @@ var toDosArray = JSON.parse(localStorage.getItem('tasks')) || [];
 
 
 // Event listeners
+window.addEventListener('load', loadFunctionsHandler);
 addItemBtn.addEventListener('click', pushItemToTaskList);
 itemList.addEventListener('click', delItem);
 makeListBtn.addEventListener('click', makeCardHandler);
 clearAllBtn.addEventListener('click', clearAll);
-window.addEventListener('load', loadFunctionsHandler);
-
+main.addEventListener('click', cardButtonsHandler);
 
 // Event handlers
+
+function loadFunctionsHandler() {
+  persistToDoLists();
+  console.log(tasksArray);
+  console.log(toDosArray);
+}
 
 function makeCardHandler(e) {
   if (titleInput != '' && itemList.innerText != '') {
@@ -38,13 +45,25 @@ function makeCardHandler(e) {
   }
 }
 
-function loadFunctionsHandler() {
-  persistToDoLists();
-  console.log(tasksArray);
-  console.log(toDosArray);
+function cardButtonsHandler(e) {
+  if (e.target.className === 'task__card--checkbox'){
+    taskItemCheck(e);
+    toggleTaskCheck(e);
+  }
+  if (e.target.className === 'task__card--delete'){
+    
+  }
 }
 
 // Functions
+
+function getId(obj) {
+  return parseInt(obj.dataset.id);
+}
+
+function getToDoListIndex(toDoListId) {
+  return toDosArray.findIndex(obj => obj.id === toDoListId);
+}
 
 
 function pushItemToTaskList(e) {
@@ -64,23 +83,25 @@ function appendNewItem(item) {
     <p class="nav__p--task">${newlyEnteredTask}</p>
   </li>`)
   taskItemInput.value = '';
-  // makeListBtn.disabled = false;
 }
 
 function delItem(e) {
   var item = e.target.closest('li');
-  var itemId = parseInt(item.dataset.id);
-  var itemIndex = tasksArray.findIndex(item => item.id === itemId);
-  tasksArray.splice(itemIndex, 1)
+  var taskItemId = getId(item);
+  var index = tasksArray.findIndex(obj => obj.id === taskItemId);
+  tasksArray.splice(index, 1)
   item.remove();
 }
+
 
 function pushTaskListToCard(toDoList) {
   var listItems = '';
   for (var i = 0; i < toDoList.tasks.length; i++) {
+    checkStatus = toDoList.tasks[i].taskComplete ? 'images/checkbox-active.svg'
+    : 'images/checkbox.svg';
     listItems += `
-    <li class="task__card--li">
-      <input class="task__card--checkbox" type="checkbox">
+    <li class="task__card--li" data-id=${toDoList.tasks[i].id}>
+      <img class="task__card--checkbox" src="${checkStatus}">
       <p>${toDoList.tasks[i].body}</p>
     </li>`
   }
@@ -89,7 +110,7 @@ function pushTaskListToCard(toDoList) {
 
 function makeCard(toDoList) {
   var taskList = `
-  <article class="task__card">
+  <article class="task__card" data-id=${toDoList.id}
     <header class="task__card--header">
       <h3>${toDoList.title}</h3>
     </header>
@@ -137,4 +158,18 @@ function persistToDoLists() {
   toDosArray.forEach(function(toDoList) {
     makeCard(toDoList);
   });
+}
+
+function taskItemCheck(e) {
+    var toDoListId = getId(e.target.closest('.task__card'));
+    var toDoListIndex = getToDoListIndex(toDoListId);
+    var toDoListObj = toDosArray[getToDoListIndex(toDoListId)];
+    var taskItemId = getId(e.target.closest('.task__card--li'));
+    var taskItemIndex = toDoListObj.tasks.findIndex(obj => obj.id === taskItemId);
+    toDosArray[toDoListIndex].updateTask(toDoListIndex, taskItemIndex);
+}
+
+function toggleTaskCheck(e) {
+  var checkbox = e.target.closest('.task__card--checkbox');
+    checkbox.src = 'images/checkbox.svg' ? checkbox.src='images/checkbox-active.svg' : checkbox.src='images/checkbox.svg';
 }

@@ -12,7 +12,7 @@ class ToDoList {
   }
 
   deleteFromStorage(i) {
-    todosArray.splice(index, 1);
+    todosArray.splice(i, 1);
 		this.saveToStorage();
   }
 
@@ -22,7 +22,7 @@ class ToDoList {
   }
 
   updateTask(i) {
-    this.taskList[i].taskComplete = !this.taskList[i].taskComplete;
+    this.tasks[i].taskComplete = !this.tasks[i].taskComplete;
     this.saveToStorage();
   }
 }

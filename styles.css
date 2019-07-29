@@ -31,7 +31,7 @@ body {
   min-height: 100%;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas: "header header header" "header header header" "nav main main"
+  grid-template-areas: "header header header" "nav main main" "nav main main"
   "nav main main" "nav main main" "nav main main" "nav main main"
   "nav main main" "nav main main" "nav main main";
 }
@@ -39,9 +39,9 @@ body {
 /* HEADER */
 
 .header {
-    grid-area: header;
-    background-color: #1F1F3D;
-    align-items: center;
+  grid-area: header;
+  background-color: #1F1F3D;
+  align-items: center;
 }
 
 .header__search {
@@ -179,6 +179,8 @@ border-radius: 2.5px;
 /* MAIN/CARD CONTAINER */
 
 .main {
+  display: flex;
+  flex-direction: column;
   grid-area: main;
   background-color: #F3F6F7;
   height: 100%;
@@ -216,13 +218,12 @@ h3 {
 }
 
 .task__card--li{
-  margin: 4% 6% 0 0;
+  margin: 4% 4%;
 }
 
 .task__card--checkbox {
   display: inline;
-  border-radius: 50%;
-  height: 1em;
+  height: 1.2em;
   vertical-align: middle;
 }
 
@@ -232,10 +233,6 @@ li p {
   margin-left: 3%;
   font-size: 1.4em;
   vertical-align: middle;
-}
-
-.test-checkbox {
-  border-radius: 50%;
 }
 
 .task__card--footer {
