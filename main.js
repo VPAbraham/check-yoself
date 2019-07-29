@@ -22,13 +22,26 @@ addItemBtn.addEventListener('click', pushItemToTaskList);
 itemList.addEventListener('click', delItem);
 makeListBtn.addEventListener('click', makeCardHandler);
 clearAllBtn.addEventListener('click', clearAll);
+window.addEventListener('load', loadFunctionsHandler);
+
 
 // Event handlers
-function navBtnsHandler(e) {
-  console.log(e);
-  enableListBtns();
-  enableItem();
 
+function makeCardHandler(e) {
+  if (titleInput != '' && itemList.innerText != '') {
+    var toDoList = new ToDoList(titleInput.value, tasksArray);
+    toDosArray.push(toDoList);
+    toDoList.saveToStorage();
+    makeCard(toDoList);
+    pushTaskListToCard(toDoList);
+    resetfields();
+  }
+}
+
+function loadFunctionsHandler() {
+  persistToDoLists();
+  console.log(tasksArray);
+  console.log(toDosArray);
 }
 
 // Functions
@@ -51,7 +64,7 @@ function appendNewItem(item) {
     <p class="nav__p--task">${newlyEnteredTask}</p>
   </li>`)
   taskItemInput.value = '';
-  makeListBtn.disabled = false;
+  // makeListBtn.disabled = false;
 }
 
 function delItem(e) {
@@ -62,18 +75,6 @@ function delItem(e) {
   item.remove();
 }
 
-function makeCardHandler(e) {
-  if (titleInput != '' && itemList.innerText != '') {
-    var toDoList = new ToDoList(titleInput.value, tasksArray);
-    toDosArray.push(toDoList);
-    toDoList.saveToStorage();
-    makeCard(toDoList);
-    console.log(toDoList);
-    pushTaskListToCard(toDoList);
-    resetfields();
-  }
-}
-
 function pushTaskListToCard(toDoList) {
   var listItems = '';
   for (var i = 0; i < toDoList.tasks.length; i++) {
@@ -82,7 +83,6 @@ function pushTaskListToCard(toDoList) {
       <input class="task__card--checkbox" type="checkbox">
       <p>${toDoList.tasks[i].body}</p>
     </li>`
-    console.log(listItems);
   }
   return listItems;
 }
@@ -110,7 +110,7 @@ function makeCard(toDoList) {
     </footer>
   </article>`;
   main.insertAdjacentHTML('afterbegin', taskList);
-  // clearAll();
+  clearAll();
 }
 
 function resetfields() {
@@ -122,9 +122,19 @@ function resetfields() {
 
 function clearAll() {
   if (titleInput.value === '' && itemList.innerText === '') {
-    clearAllBtn.disabled = true;
-    // clearAllBtn.style.["background-color"] = "grey";
+    return;
   } else {
     resetfields();
   }
+}
+
+function persistToDoLists() {
+  var placeholderArray = toDosArray.map(function(toDoList) {
+    toDoList = new ToDoList (toDoList.title, toDoList.tasks, toDoList.id, toDoList.urgent);
+    return toDoList;
+  });
+  toDosArray = placeholderArray;
+  toDosArray.forEach(function(toDoList) {
+    makeCard(toDoList);
+  });
 }
