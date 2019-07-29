@@ -218,13 +218,12 @@ h3 {
 }
 
 .task__card--li{
-  margin: 4% 6% 0 0;
+  margin: 4% 4%;
 }
 
 .task__card--checkbox {
   display: inline;
-  border-radius: 50%;
-  height: 1em;
+  height: 1.2em;
   vertical-align: middle;
 }
 
@@ -234,10 +233,6 @@ li p {
   margin-left: 3%;
   font-size: 1.4em;
   vertical-align: middle;
-}
-
-.test-checkbox {
-  border-radius: 50%;
 }
 
 .task__card--footer {
