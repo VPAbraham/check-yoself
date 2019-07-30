@@ -15,9 +15,6 @@ var toDosArray = JSON.parse(localStorage.getItem('tasks')) || [];
 
 
 
-// Auto-loading Functions
-
-
 // Event listeners
 window.addEventListener('load', loadFunctionsHandler);
 addItemBtn.addEventListener('click', pushItemToTaskList);
@@ -103,10 +100,12 @@ function pushTaskListToCard(toDoList) {
   for (var i = 0; i < toDoList.tasks.length; i++) {
     var checkStatus = toDoList.tasks[i].taskComplete ? 'images/checkbox-active.svg'
     : 'images/checkbox.svg';
+    var italicsStatus = toDoList.tasks[i].taskComplete ?
+    'style="color: #3c6577; font-style: italic"' : '';
     listItems += `
-    <li class="task__card--li">
-      <img class="task__card--checkbox" src="${checkStatus}" data-id=${toDoList.tasks[i].id}>
-      <p>${toDoList.tasks[i].body}</p>
+    <li class="task__card--li" data-id=${toDoList.tasks[i].id}>
+      <img class="task__card--checkbox" src="${checkStatus}" >
+      <p class="task-body" ${italicsStatus}>${toDoList.tasks[i].body}</p>
     </li>`
   }
   return listItems;
@@ -116,15 +115,15 @@ function makeCard(toDoList) {
   var urgentStatus = toDoList.urgent ? 'images/urgent-active.svg' : 'images/urgent.svg';
   var taskList = `
   <article class="task__card" data-id=${toDoList.id}
-    <header class="task__card--header">
+    <div class="task__card--header">
       <h3>${toDoList.title}</h3>
-    </header>
+    </div>
     <section class="task__card--body">
       <ul class="task__card--list">
       ${pushTaskListToCard(toDoList)}
       </ul>
     </section>
-    <footer class="task__card--footer">
+    <div class="task__card--footer">
       <span class="task__card--urgent">
         <img class="urgent-img" src="${urgentStatus}" alt="urgency lightning bolt">
         <p>URGENT</p>
@@ -133,7 +132,7 @@ function makeCard(toDoList) {
         <img class="delete-img" src="images/delete.svg" alt="delete X button">
         <p class="span__p--delete">DELETE</p>
       </span>
-    </footer>
+    </div>
   </article>`;
   main.insertAdjacentHTML('afterbegin', taskList);
   clearAll();
@@ -168,20 +167,19 @@ function persistToDoLists() {
 function taskItemCheck(e) {
   var toDoListId = getId(e.target.closest('.task__card'));
   var toDoListIndex = getToDoListIndex(toDoListId);
-  var toDoListObj = toDosArray[getToDoListIndex(toDoListId)];
+  var toDoListObj = toDosArray[toDoListIndex];
   var taskItemId = getId(e.target.closest('.task__card--li'));
   var taskItemIndex = toDoListObj.tasks.findIndex(obj => obj.id === taskItemId);
-  toDosArray[toDoListIndex].updateTask(toDoListIndex, taskItemIndex);
+  console.log(typeof taskItemIndex);
+  toDosArray[toDoListIndex].updateTask(taskItemIndex);
 }
 
 function toggleTaskCheck(e) {
   var checkbox = e.target.closest('.task__card--checkbox');
-    checkbox.src = 'images/checkbox.svg' ? checkbox.src='images/checkbox-active.svg' : checkbox.src='images/checkbox.svg';
+  checkbox.src.includes('images/checkbox.svg') ? checkbox.src='images/checkbox-active.svg' : checkbox.src='images/checkbox.svg';
+  var paragraph = e.target.closest('.task-body');
+  paragraph.style.includes('font-style: italic') ? paragraph.style='' : paragraph.style='color: #3c6577; font-style: italic';
 }
-
-// function delCardDom(e) {
-//   e.target.closest('article').remove();
-// }
 
 function delTaskList(e) {
   var toDoListId = getId(e.target.closest('.task__card'));
@@ -199,5 +197,7 @@ function markUrgent(e) {
 
 function toggleUrgent(e) {
   var urgentButton = e.target.closest('.urgent-img');
-  urgentButton.src = 'images/urgent.svg' ? urgentButton.src='images/urgent-active.svg' : urgentButton.src='images/checkbox.svg';
+  urgentButton.src.includes('images/urgent.svg') ? urgentButton.src='images/urgent-active.svg' : urgentButton.src='images/urgent.svg';
+  var card = e.target.closest('.task__card');
+  card.classList.toggle('urgent');
 }

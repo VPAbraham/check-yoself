@@ -31,7 +31,6 @@ class ToDoList {
   }
 }
 
-
 class Item {
   constructor(body, id) {
     this.id = id || Date.now();
