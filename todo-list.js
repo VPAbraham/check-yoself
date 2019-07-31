@@ -29,6 +29,13 @@ class ToDoList {
     this.tasks[i].taskComplete = !this.tasks[i].taskComplete;
     this.saveToStorage();
   }
+
+  verifyTasksComplete() {
+    var tasksDone = this.tasks.every(function (e) {
+      return e.taskComplete === true
+    });
+    return tasksDone;
+  }
 }
 
 class Item {

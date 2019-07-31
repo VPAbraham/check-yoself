@@ -183,16 +183,16 @@ function toggleTaskCheck(e) {
   var paragraph = e.target.closest('.task-body');
 }
 
-function checkTaskListComplete() {
-
-}
 
 function delTaskList(e) {
   var toDoListId = getId(e.target.closest('.task__card'));
   var toDoListIndex = getToDoListIndex(toDoListId);
-  toDosArray[toDoListIndex].deleteFromStorage(toDoListIndex);
+  var toDoListObj = toDosArray[toDoListIndex];
+  if (toDoListObj.verifyTasksComplete() === true) {
+  toDoListObj.deleteFromStorage(toDoListIndex);
   toDosArray.splice(toDoListIndex, 1);
   e.target.closest('article').remove();
+  }
 }
 
 function markUrgent(e) {
@@ -214,6 +214,4 @@ function toggleUrgent(e) {
 function toggleItalics(e) {
   var listItem = e.target.closest('.task__card--list')
   listItem.classList.toggle('italic');
-}
-
 }
