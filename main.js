@@ -1,4 +1,5 @@
 // Global Variables
+var tasksArray = [];
 var main = document.querySelector('.main');
 var nav = document.querySelector('.nav');
 var header = document.querySelector('.header');
@@ -10,7 +11,6 @@ var makeListBtn = document.querySelector('.nav__button--make-tl');
 var clearAllBtn = document.querySelector('.nav__button--clear');
 var filterUrgencyBtn = document.querySelector('.nav__button--filter');
 var toDoListCard = document.querySelector('.task__card');
-var tasksArray = [];
 var toDosArray = JSON.parse(localStorage.getItem('tasks')) || [];
 
 
@@ -33,7 +33,7 @@ function loadFunctionsHandler() {
 
 function makeCardHandler(e) {
   if (titleInput != '' && itemList.innerText != '') {
-    var toDoList = new ToDoList(titleInput.value, tasksArray);
+    var toDoList = new ToDoList(titleInput.value, tasksArray, Date.now());
     toDosArray.push(toDoList);
     toDoList.saveToStorage();
     makeCard(toDoList);
@@ -46,6 +46,7 @@ function cardButtonsHandler(e) {
   if (e.target.className === 'task__card--checkbox') {
     taskItemCheck(e);
     toggleTaskCheck(e);
+    toggleItalics(e);
   }
   if (e.target.className === 'delete-img') {
     delTaskList(e);
@@ -73,6 +74,7 @@ function pushItemToTaskList(e) {
     tasksArray.push(newItem);
     appendNewItem(newItem);
   }
+  else makeListBtn.disabled = true;
 }
 
 function appendNewItem(item) {
@@ -113,8 +115,9 @@ function pushTaskListToCard(toDoList) {
 
 function makeCard(toDoList) {
   var urgentStatus = toDoList.urgent ? 'images/urgent-active.svg' : 'images/urgent.svg';
+  var urgentCard = toDoList.urgent ? 'urgent' : '';
   var taskList = `
-  <article class="task__card" data-id=${toDoList.id}
+  <article class="task__card ${urgentCard}" data-id=${toDoList.id}>
     <div class="task__card--header">
       <h3>${toDoList.title}</h3>
     </div>
@@ -178,7 +181,10 @@ function toggleTaskCheck(e) {
   var checkbox = e.target.closest('.task__card--checkbox');
   checkbox.src.includes('images/checkbox.svg') ? checkbox.src='images/checkbox-active.svg' : checkbox.src='images/checkbox.svg';
   var paragraph = e.target.closest('.task-body');
-  paragraph.style.includes('font-style: italic') ? paragraph.style='' : paragraph.style='color: #3c6577; font-style: italic';
+}
+
+function checkTaskListComplete() {
+
 }
 
 function delTaskList(e) {
@@ -192,12 +198,22 @@ function delTaskList(e) {
 function markUrgent(e) {
   var toDoListId = getId(e.target.closest('.task__card'));
   var toDoListIndex = getToDoListIndex(toDoListId);
+  var toDoListObj = toDosArray[toDoListIndex];
+  console.log(toDosArray[toDoListIndex]);
   toDosArray[toDoListIndex].updateToDo();
-}
+
+};
 
 function toggleUrgent(e) {
   var urgentButton = e.target.closest('.urgent-img');
   urgentButton.src.includes('images/urgent.svg') ? urgentButton.src='images/urgent-active.svg' : urgentButton.src='images/urgent.svg';
   var card = e.target.closest('.task__card');
   card.classList.toggle('urgent');
+}
+
+function toggleItalics(e) {
+  var listItem = e.target.closest('.task__card--list')
+  listItem.classList.toggle('italic');
+}
+
 }

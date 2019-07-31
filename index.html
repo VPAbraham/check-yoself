@@ -8,26 +8,27 @@
     <link rel="stylesheet" type="text/css" href="normalize.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
   </head>
   <body>
     <header class="header">
       <h1>CHECK <span>YO'</span> SELF</h1>
       <article class="header__search">
         <img class="header__search--icon" src="images/search.svg" alt="magnifying glass search icon">
-        <input class="header__search--bar" type="text" name="" value="Search">
+        <input class="header__search--bar" type="text" name="" value="Search" onfocus="if (this.value == 'Search') {this.value=''}">
       </article>
     </header>
     <nav class="nav">
       <section class="nav__upper">
         <article class="nav__article--ttitle">
           <label class="nav__label--ttitle" for="">Task Title</label>
-          <input class="nav__input--ttitle" type="text" name="" value="">
+          <input class="nav__input--ttitle" type="text" placeholder="Name your to do list!">
           <ul class="nav__task--list"></ul>
         </article>
         <article class="nav__article--titem">
           <label class="nav__label--titem"for="">Task Item</label>
           <div class="nav__div--adder">
-            <input class="nav__input--titem" type="text" name="" value="">
+            <input class="nav__input--titem" type="text" placeholder="Add some tasks!">
             <button class="nav__button--titem" type="button" name="button">+</button>
           </div>
         </article>
