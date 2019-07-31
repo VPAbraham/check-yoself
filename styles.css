@@ -5,7 +5,7 @@
 }
 
 html {
-	font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   height: 100%;
 }
 
@@ -26,65 +26,66 @@ span {
 }
 
 body {
-  margin: 0;
   display: grid;
-  min-height: 100%;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas: "header header header" "header header header" "nav main main"
   "nav main main" "nav main main" "nav main main" "nav main main"
   "nav main main" "nav main main" "nav main main";
+  margin: 0;
+  min-height: 100%;
+
 }
 
 /* HEADER */
 
 .header {
-  grid-area: header;
+  align-items: center;
   background-color: #1F1F3D;
   display: flex;
-  justify-content: space-between;
+  grid-area: header;
   height: 9vh;
-  align-items: center;
+  justify-content: space-between;
   min-height: 66px;
 }
 
 .header__search {
-  height: 40px;
   display: flex;
   float: right;
+  height: 40px;
+  margin-right: 2%;
   padding: 0px 0px 0px -10px;
   width: 237px;
-  margin-right: 2%;
 }
 
 .header__search--bar {
-  height: 100%;
-  width: 100%;
-  display: inline;
-  vertical-align: middle;
   border-radius: 0 2.5px 2.5px 0;
+  display: inline;
+  height: 100%;
+  vertical-align: middle;
+  width: 100%;
 }
 
 .header__search--icon {
-  height: 100%;
-  display: inline;
-  width: 18%;
-  font-size: 8px;
   background-color: #F3F6F7;
-  vertical-align: middle;
-  padding: 8px;
   border-radius: 2.5px 0 0 2.5px;
+  display: inline;
+  font-size: 8px;
+  height: 100%;
+  padding: 8px;
+  vertical-align: middle;
+  width: 18%;
 }
 
 /* NAV */
 
 .nav {
-  grid-area: nav;
   background-color: #587A8A;
-  text-align: center;
-  height: 100%;
   display: flex;
+  grid-area: nav;
+  height: 100%;
   justify-content: center;
   padding-top: 30px;
+  text-align: center;
 }
 .nav__upper {
   width: 95%;
@@ -96,8 +97,8 @@ body {
 
 .nav__label--ttitle,
 .nav__label--titem {
-  font-size: 1.1em;
   color: #C7D3D8;
+  font-size: 1.1em;
 }
 
 .nav__input--ttitle {
@@ -112,27 +113,27 @@ body {
 }
 
 .nav__li--task {
-  font-size: 1em;
-  margin-top: 10px;
+  align-items: center;
   color: #F3F6F7;
   display: flex;
-  align-items: center;
+  font-size: 1em;
+  margin-top: 10px;
 }
 
 .nav__img--del--idea {
-  width: 2em;
-  padding-right: 10px;
+  border-radius: 0px 5px 5px 0px;
   display: inline-block;
   margin-left: -5px;
-  border-radius: 0px 5px 5px 0px
+  padding-right: 10px;
+  width: 2em;
 }
 
 .nav__p--task {
+  color: #F3F6F7;
   font-size: 1.1em;
+  font-size: 1.2em;
   margin: 0px;
   padding: 0px;
-  color: #F3F6F7;
-  font-size: 1.2em;
 }
 
 .nav__div--adder {
@@ -150,21 +151,21 @@ body {
 
 .nav__input--ttitle,
 .nav__input--titem {
-  height: 50px;
-  width: 100%;
   border: 2.5px solid #1F1F3D;
-  padding-left: 12px;
   font-size: 1.3em;
+  height: 50px;
+  padding-left: 12px;
+  width: 100%;
 }
 
 .nav__button--titem {
-  color: white;
   background-color: #1F1F3D;
   border-radius: 0 2.5px 2.5px 0;
   border: none;
+  color: white;
+  font-size: 40px;
   height: 50px;
   width: 40px;
-  font-size: 40px;
 }
 
 .nav__button--make-tl {
@@ -185,26 +186,26 @@ body {
 }
 
 .nav__button {
-  height: 50px;
-  width: 100%;
+  background-color: #1F1F3D;
+  border-radius: 2.5px;
   border: none;
   color: white;
   font-size: 20px;
-  border-radius: 2.5px;
-  background-color: #1F1F3D;
   font-weight: 600;
+  height: 50px;
+  width: 100%;
 }
 
 /* MAIN/CARD CONTAINER */
 
 .main {
   background-color: #f3f6f7;
-  grid-area: main;
-  height: 100%;
-  padding: 1rem;;
-  min-height: 100vh;
   column-width: 17em;
   columns: 2;
+  grid-area: main;
+  height: 100%;
+  min-height: 100vh;
+  padding: 1rem;;
 }
 
 /* TO DO LIST CARD */
@@ -212,11 +213,11 @@ body {
 .task__card {
   background-color: #fafdfa;
   border: 2px solid #c7d3d8;
-  font-weight: 400;
   color: #1f1f3d;
-  min-width: 275px;
   display: inline-block;
+  font-weight: 400;
   margin:  0.5rem  1rem  0.5rem 0;
+  min-width: 275px;
   width:  90%;
 }
 
@@ -231,10 +232,10 @@ body {
 }
 
 .task__card--header {
-  height: 17%;
   border-bottom: solid 2px #C7D3D8;
-  text-align: left;
   display: flex;
+  height: 17%;
+  text-align: left;
 }
 
 h3 {
@@ -249,57 +250,56 @@ h3 {
 }
 
 .task__card--list {
-   /* border-bottom: 1px solid var(--tasks-border-grey); */
-    color: var(--background-dark-blue);
-    font-size: 18px;
-    line-height: 2;
-    list-style-type: none;
-    margin: 0px;
-    padding: 15px 18px 15px 18px;
+  color: var(--background-dark-blue);
+  font-size: 18px;
+  line-height: 2;
+  list-style-type: none;
+  margin: 0px;
+  padding: 15px 18px 15px 18px;
 }
 
 .task__card--li{
-    display: flex;
-    align-items: center;
+  align-items: center;
+  display: flex;
 }
 
 .italic {
-  font-style: italic;
   color: #3c6577;
+  font-style: italic;
 }
 
 .task__card--checkbox {
   display: inline;
   height: 1.2em;
-  vertical-align: middle;
   margin-right: 1vw;
+  vertical-align: middle;
 }
 
 li p {
   display: inline;
-  margin: 0;
   font-size: 1.4em;
+  margin: 0;
   vertical-align: middle;
 }
 
 .task__card--footer {
+  align-items: center;
   border-top: solid 2px #C7D3D8;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 div span {
+  align-items: center;
   color: #3C6577;
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin: .3em 0.4em;
 }
 
 .task__card--urgent {
-  margin: 2% 3% 1% 3%;
   float: left;
+  margin: 2% 3% 1% 3%;
 }
 
 .task__card--delete {
@@ -312,6 +312,12 @@ div span {
 
 .urgent-img {
 
+}
+
+.hidden {
+  left: -9999px;
+  position: absolute;
+  top: -9999px;
 }
 
 span {
@@ -334,8 +340,8 @@ span p {
 }
 
 .main {
-  width: auto;
   columns: auto;
+  width: auto;
 }
 
 .task__card {
@@ -355,6 +361,7 @@ li p {
 
 
 @media only screen and (max-width: 560px) {
+  
 body {
   display: inline-block;
   width: 100%;
@@ -368,8 +375,8 @@ body {
 }
 
 .header__search {
-  width: 290px;
   margin: 0;
+  width: 290px;
 }
 
 .nav {
@@ -393,9 +400,9 @@ body {
 }
 
 .main {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding-right: 22px;
 }
 

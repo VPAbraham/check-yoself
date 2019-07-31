@@ -10,6 +10,7 @@ var itemList = document.querySelector('.nav__task--list')
 var makeListBtn = document.querySelector('.nav__button--make-tl');
 var clearAllBtn = document.querySelector('.nav__button--clear');
 var filterUrgencyBtn = document.querySelector('.nav__button--filter');
+var searchField = document.querySelector('.header__search--bar');
 var toDoListCard = document.querySelector('.task__card');
 var toDosArray = JSON.parse(localStorage.getItem('tasks')) || [];
 
@@ -22,6 +23,7 @@ itemList.addEventListener('click', delItem);
 makeListBtn.addEventListener('click', makeCardHandler);
 clearAllBtn.addEventListener('click', clearAll);
 main.addEventListener('click', cardButtonsHandler);
+searchField.addEventListener('keyup', searchHandler);
 
 // Event handlers
 
@@ -212,6 +214,31 @@ function toggleUrgent(e) {
 }
 
 function toggleItalics(e) {
-  var listItem = e.target.closest('.task__card--list')
+  var listItem = e.target.closest('.task__card--li')
   listItem.classList.toggle('italic');
+}
+
+function searchHandler(e){
+  var searchTerms = event.target.closest('.header__search--bar').value
+  searchTerms = searchTerms.toLowerCase();
+  var cardContent = document.querySelectorAll('h3');
+  var card = document.querySelectorAll(".task__card");
+  searchCardContent(searchTerms, card, cardContent);
+}
+
+
+function searchCardContent(input, card, content, body) {
+  var cardContent = document.querySelectorAll("h3");
+  var card = document.querySelectorAll(".task__card");
+  for (var i = 0; i < cardContent.length; i++) {
+    if (!cardContent[i].innerText.toLowerCase().includes(input)) {
+      card[i].classList.add('hidden');
+    }
+    if (cardContent[i].innerText.toLowerCase().includes(input)) {
+      card[i].classList.remove('hidden');
+    }
+    else if (input.length === 0) {
+      card[i].classList.remove('hidden');
+    }
+  }
 }
