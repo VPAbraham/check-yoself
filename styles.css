@@ -1,8 +1,7 @@
-/* Overall Styles */
+/* ELEMENT ELECTORS */
 
 * {
   box-sizing: border-box;
-  /* border: solid 1px red; */
 }
 
 html {
@@ -13,6 +12,7 @@ html {
 img {
   width: 20px;
 }
+
 
 h1{
   color: #FFFFFF;
@@ -30,8 +30,7 @@ body {
   display: grid;
   min-height: 100%;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-areas: "header header header" "nav main main" "nav main main"
+  grid-template-areas: "header header header" "header header header" "nav main main"
   "nav main main" "nav main main" "nav main main" "nav main main"
   "nav main main" "nav main main" "nav main main";
 }
@@ -41,26 +40,39 @@ body {
 .header {
   grid-area: header;
   background-color: #1F1F3D;
+  display: flex;
+  justify-content: space-between;
+  height: 9vh;
   align-items: center;
+  min-height: 66px;
 }
 
 .header__search {
   height: 40px;
-  display: inline;
+  display: flex;
   float: right;
+  padding: 0px 0px 0px -10px;
+  width: 237px;
+  margin-right: 2%;
 }
 
 .header__search--bar {
   height: 100%;
+  width: 100%;
   display: inline;
-  vertical-align:middle;
+  vertical-align: middle;
+  border-radius: 0 2.5px 2.5px 0;
 }
 
 .header__search--icon {
   height: 100%;
   display: inline;
-  background-color: #587A8A;
+  width: 18%;
+  font-size: 8px;
+  background-color: #F3F6F7;
   vertical-align: middle;
+  padding: 8px;
+  border-radius: 2.5px 0 0 2.5px;
 }
 
 /* NAV */
@@ -72,29 +84,30 @@ body {
   height: 100%;
   display: flex;
   justify-content: center;
+  padding-top: 30px;
 }
 .nav__upper {
   width: 95%;
 }
 
 .nav__article--ttitle {
-
+  text-align: left;
 }
 
 .nav__label--ttitle,
 .nav__label--titem {
-  font-size: 14px;
+  font-size: 1.1em;
   color: #C7D3D8;
-  float: left;
 }
 
 .nav__input--ttitle {
-
+  border-radius: 2.5px;
+  margin-top: 9px;
 }
 
 .nav__task--list {
   list-style: none;
-  margin: 0px;
+  margin: 5vh 0;
   width: 80%;
 }
 
@@ -119,40 +132,47 @@ body {
   margin: 0px;
   padding: 0px;
   color: #F3F6F7;
+  font-size: 1.2em;
 }
 
+.nav__div--adder {
+  display: flex;
+  margin-top: 9px;
+}
 .nav__article--titem {
-
+  text-align: left;
 }
 
 
 .nav__input--titem {
-
+  border-radius: 2.5px 0 0 2.5px;
 }
 
 .nav__input--ttitle,
 .nav__input--titem {
-  height: 40px;
+  height: 50px;
   width: 100%;
-  border: 1.5px solid #1F1F3D;
-border-radius: 2.5px;
+  border: 2.5px solid #1F1F3D;
+  padding-left: 12px;
+  font-size: 1.3em;
 }
 
 .nav__button--titem {
   color: white;
   background-color: #1F1F3D;
-  border-radius: 2.5px;
+  border-radius: 0 2.5px 2.5px 0;
   border: none;
-  height: 30px;
-  width: 30px;
+  height: 50px;
+  width: 40px;
+  font-size: 40px;
 }
 
 .nav__button--make-tl {
-
+  margin: 25px 0;
 }
 
 .nav__button--clear {
-
+  margin-bottom: 25px;
 }
 
 .nav__lower{
@@ -161,11 +181,11 @@ border-radius: 2.5px;
 }
 
 .nav__button--filter {
-
+  margin-top: 25px;
 }
 
 .nav__button {
-  height: 40px;
+  height: 50px;
   width: 100%;
   border: none;
   color: white;
@@ -173,26 +193,41 @@ border-radius: 2.5px;
   border-radius: 2.5px;
   background-color: #1F1F3D;
   font-weight: 600;
-  margin: 7px 0px;
 }
 
 /* MAIN/CARD CONTAINER */
 
 .main {
-  display: flex;
-  flex-direction: column;
+  background-color: #f3f6f7;
   grid-area: main;
-  background-color: #F3F6F7;
   height: 100%;
+  padding: 1rem;;
+  min-height: 100vh;
+  column-width: 17em;
+  columns: 2;
 }
 
+/* TO DO LIST CARD */
+
 .task__card {
-  border: solid 2px #C7D3D8;
-  width: 45%;
-  margin: 6vh;
-  display: flex;
-  flex-direction: column;
-  height: 48vh;
+  background-color: #fafdfa;
+  border: 2px solid #c7d3d8;
+  font-weight: 400;
+  color: #1f1f3d;
+  min-width: 275px;
+  display: inline-block;
+  margin:  0.5rem  1rem  0.5rem 0;
+  width:  90%;
+}
+
+.urgent {
+  background-color: #FFE89D;
+  border-color: #FFC30C;
+}
+
+.task__card:hover {
+  box-shadow: 5px 8px 22px -8px rgba(0,0,0,0.57);
+  transition: 0.5s;
 }
 
 .task__card--header {
@@ -203,43 +238,58 @@ border-radius: 2.5px;
 }
 
 h3 {
+  font-size: 1.6em;
   margin: 3% 0px 3% 5%;
 }
 
 .task__card--body {
-  min-height: 63%
-  /* height: 100%; */
+  align-items: center;
+  display: flex;
+  margin: 3% 0 3% 0;
 }
 
 .task__card--list {
-  list-style: none;
-  font-size: 14px;
-  padding-left: 4%;
+   /* border-bottom: 1px solid var(--tasks-border-grey); */
+    color: var(--background-dark-blue);
+    font-size: 18px;
+    line-height: 2;
+    list-style-type: none;
+    margin: 0px;
+    padding: 15px 18px 15px 18px;
 }
 
 .task__card--li{
-  margin: 4% 4%;
+    display: flex;
+    align-items: center;
+}
+
+.italic {
+  font-style: italic;
+  color: #3c6577;
 }
 
 .task__card--checkbox {
   display: inline;
   height: 1.2em;
   vertical-align: middle;
+  margin-right: 1vw;
 }
 
 li p {
   display: inline;
   margin: 0;
-  margin-left: 3%;
   font-size: 1.4em;
   vertical-align: middle;
 }
 
 .task__card--footer {
   border-top: solid 2px #C7D3D8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-footer span {
+div span {
   color: #3C6577;
   display: flex;
   flex-direction: column;
@@ -248,6 +298,7 @@ footer span {
 }
 
 .task__card--urgent {
+  margin: 2% 3% 1% 3%;
   float: left;
 }
 
@@ -258,6 +309,7 @@ footer span {
 .span__p--delete {
   margin-top: .5em;
 }
+
 .urgent-img {
 
 }
@@ -269,4 +321,94 @@ span {
 span p {
   font-size: .5em;
   margin: .1em 0;
+}
+
+
+/* MEDIA QUERIES */
+
+
+@media screen and (max-width: 860px) {
+
+.nav__button {
+  font-size: 1em;
+}
+
+.main {
+  width: auto;
+  columns: auto;
+}
+
+.task__card {
+  margin-left: 2.7vw;
+}
+
+h3 {
+  font-size: 1.8em
+}
+
+li p {
+  font-size: 1.5em;
+}
+
+}
+
+
+
+@media only screen and (max-width: 560px) {
+body {
+  display: inline-block;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  height: 125px;
+  padding-bottom: 12px;
+}
+
+.header__search {
+  width: 290px;
+  margin: 0;
+}
+
+.nav {
+  padding-top: 18px;
+}
+
+.nav__task--list {
+  margin: 3vh 0;
+}
+
+.nav__button--make-tl {
+  margin-top: 20px;
+}
+
+.nav__button--clear {
+  margin: 9px 0px;
+}
+
+.nav__button--filter {
+  margin: 9px 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 22px;
+}
+
+.task__card {
+  margin-right: 0;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+li p {
+  font-size: 20px;
+}
+
 }
