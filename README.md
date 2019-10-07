@@ -1,7 +1,7 @@
 # Check Yo' Self
 #### A Turing Mod 1 Project
 
-[https://vpabraham.github.io/check-yoself/](Link to Project)
+[Link to Project](https://vpabraham.github.io/check-yoself/)
 
 ## Challenge
 To build a webpage that allows users to create and store their task lists with customizable tasks for future reference. Tasks will be stored locally using `localStorage` and be avilable for later perusal.
